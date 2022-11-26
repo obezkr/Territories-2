@@ -9,10 +9,11 @@ public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public int fps = 30, numberOfPlayers = 4, size, penalty, height, width;
-    public string nowToMove = "blue", winnerMessage = "";
+    public string nowToMove = "1", winnerMessage = "";
     public bool createRect = true;
     public string[,] allSquares, allPossibleSquares;
-    public string[] colorArray = { "blue", "red", "green", "yellow" };
+    public string[] colorArray = {"1", "2", "3", "4"};
+    [SerializeField] public Color[] playersColorsArray={};
     public int[] playersScores;
     private int n, m, i, j, max = 0;
 
@@ -36,7 +37,6 @@ public class GameManager : MonoBehaviour
             }
         }
         winnerMessage = (colorArray[max] + " won!");
-        //Debug.Log("finish-game-function");
     }
 
     async Task ApplySettingsFromFile()
@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
                     height = Convert.ToInt32(splittedLine[1]);
                 if (splittedLine[0] == "width")
                     width = Convert.ToInt32(splittedLine[1]);
+                
             }
         }
         Debug.Log(size);
@@ -99,10 +100,10 @@ public class GameManager : MonoBehaviour
                 allPossibleSquares[i, j] = "empty";
             }
         }
-        allPossibleSquares[0, 0] = "blue";
-        allPossibleSquares[0, m - 1] = "red";
-        allPossibleSquares[n - 1, m - 1] = "green";
-        allPossibleSquares[n-1, 0] = "yellow";
+        allPossibleSquares[0, 0] = colorArray[0];
+        allPossibleSquares[0, m - 1] = colorArray[1];
+        allPossibleSquares[n - 1, m - 1] = colorArray[2];
+        allPossibleSquares[n-1, 0] = colorArray[3];
 
 
     }

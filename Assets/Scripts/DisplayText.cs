@@ -12,19 +12,19 @@ public class DisplayText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (myself.name.Contains("Blue"))
+        if (myself.name.Contains("1"))
         {
             myself.text = (gameManagerScript.playersScores[0].ToString());
         }
-        if (myself.name.Contains("Red"))
+        if (myself.name.Contains("2"))
         {
             myself.text = (gameManagerScript.playersScores[1].ToString());
         }
-        if (myself.name.Contains("Green"))
+        if (myself.name.Contains("3"))
         {
             myself.text = (gameManagerScript.playersScores[2].ToString());
         }
-        if (myself.name.Contains("Yellow"))
+        if (myself.name.Contains("4"))
         {
             myself.text = (gameManagerScript.playersScores[3].ToString());
         }

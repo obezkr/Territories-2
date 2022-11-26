@@ -188,7 +188,7 @@ public class PlaceRect : MonoBehaviour
                     gameManagerScript.playersScores[Array.IndexOf(colorArray, nowToMove)] =
                         gameManagerScript.playersScores[Array.IndexOf(colorArray, nowToMove)] + 
                         rectHeight / size * rectWidth / size;
-                    //синхронизируем массивы и передаем очередность хода
+                    //синхронизируем массивы и передаем очередность хода (синхрон? по моєму тут не треба нічого синхронізовувати)
                     gameManagerScript.allSquares = allSquares;
                     gameManagerScript.allPossibleSquares = allPossibleSquares;
                     passMoveScript.Pass();
