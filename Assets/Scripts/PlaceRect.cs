@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Mirror;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlaceRect : MonoBehaviour
+public class PlaceRect : NetworkBehaviour
 {
     [SerializeField] private GameObject gameManager; // это сам обьект GameManager, который на сцене
     [SerializeField] private GameManager gameManagerScript; // а это его скрипт
@@ -20,6 +21,8 @@ public class PlaceRect : MonoBehaviour
     private string nowToMove;
     void Start()
     {
+        gameManager = GameObject.Find("GameManager");
+        passMove = GameObject.Find("PassMove");
         gameManagerScript = gameManager.GetComponent<GameManager>();
         passMoveScript = passMove.GetComponent<PassMove>();
         size = gameManagerScript.size;
