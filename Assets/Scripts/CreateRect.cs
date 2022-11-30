@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class CreateRect : MonoBehaviour
+public class CreateRect : NetworkBehaviour
 {
     public static int size, randWidth, randHeight, height, width;
     public static int rectCounter=-1;
@@ -14,6 +15,7 @@ public class CreateRect : MonoBehaviour
     [SerializeField] private GameManager gameManagerScript; // а это его скрипт
     void Start()
     {
+        gameManager = GameObject.Find("GameManager");
         gameManagerScript = gameManager.GetComponent<GameManager>();
         size = gameManagerScript.size;
         height = gameManagerScript.height;
