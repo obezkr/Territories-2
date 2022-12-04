@@ -79,6 +79,7 @@ public class PlaceRect : NetworkBehaviour
         }
         return coord;
     }
+
     void Update()
     {
         allSquares = gameManagerScript.allSquares;

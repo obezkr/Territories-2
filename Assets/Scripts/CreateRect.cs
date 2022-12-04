@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +9,7 @@ public class CreateRect : NetworkBehaviour
     public static int size, randWidth, randHeight, height, width;
     public static int rectCounter=-1;
     public static bool createRect;
-    
+    [SyncVar] public bool isPlayerAHost=false;
     [SerializeField] private GameObject singlePixelPrefab;
     [SerializeField] private GameObject gameManager; // это сам обьект GameManager, который на сцене
     [SerializeField] private GameManager gameManagerScript; // а это его скрипт
@@ -22,11 +22,16 @@ public class CreateRect : NetworkBehaviour
         width = gameManagerScript.width;
         createRect = gameManagerScript.createRect;
         singlePixelPrefab.transform.localScale = new Vector3(size, size, 1);
+        if (!isPlayerAHost && isLocalPlayer && isServer)
+        {
+            isPlayerAHost=true;
+            //Instantiate(singlePixelPrefab);
+        }
     }
 
     void Update()
     {
-        if (createRect == true)
+        if (createRect == true /*&& isPlayerAHost==true && isLocalPlayer==true*/)
         {
             rectCounter++;
             createRect = false;
@@ -38,6 +43,9 @@ public class CreateRect : NetworkBehaviour
             GameObject newRandRect = Instantiate(singlePixelPrefab);
             newRandRect.transform.localScale = new Vector3(randWidth, randHeight, 1);
             newRandRect.transform.name = rectCounter + "Rect";
+            NetworkServer.Spawn(newRandRect); //give authority to client    111111111111111111111111111111111111111111111
+            
         }
     }
+
 }

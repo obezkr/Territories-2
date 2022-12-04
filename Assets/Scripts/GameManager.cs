@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Threading.Tasks;
 using System.IO;
 using System;
+using Mirror;
 
 public class GameManager : MonoBehaviour
 {
