@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6695286410391482605}
   - component: {fileID: 2707412846249698119}
   - component: {fileID: -8072983515200715762}
+  - component: {fileID: 1542240585614230637}
   m_Layer: 6
   m_Name: SinglePixel
   m_TagString: Untagged
@@ -77,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: dc2e63ad4cfcb8a4794d4b3ba10db5bd, type: 3}
-  m_Color: {r: 0, g: 0, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -106,6 +107,8 @@ MonoBehaviour:
   gameManagerScript: {fileID: 0}
   passMove: {fileID: 0}
   passMoveScript: {fileID: 0}
+  createRect: {fileID: 0}
+  createRectScript: {fileID: 0}
   myself: {fileID: 6695286410391482603}
   rectWidth: 0
   rectHeight: 0
@@ -158,3 +161,29 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!114 &1542240585614230637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6695286410391482603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df2868252ab5c4d1da357e8f11f1b524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  InLocalSpace: 0
+  Interpolate: 1

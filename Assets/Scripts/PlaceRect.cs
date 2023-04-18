@@ -10,6 +10,8 @@ public class PlaceRect : NetworkBehaviour
     [SerializeField] private GameManager gameManagerScript; // а это его скрипт
     [SerializeField] private GameObject passMove;
     [SerializeField] private PassMove passMoveScript;
+    [SerializeField] private GameObject createRect;
+    [SerializeField] private CreateRect createRectScript;
     public GameObject myself;
     private int size, height, width;
     public int rectWidth, rectHeight;
@@ -23,13 +25,15 @@ public class PlaceRect : NetworkBehaviour
     {
         gameManager = GameObject.Find("GameManager");
         passMove = GameObject.Find("PassMove");
+        createRect = GameObject.Find("CreateRect");
         gameManagerScript = gameManager.GetComponent<GameManager>();
         passMoveScript = passMove.GetComponent<PassMove>();
+        createRectScript = createRect.GetComponent<CreateRect>();
         size = gameManagerScript.size;
         height = gameManagerScript.height;
         width = gameManagerScript.width;
-        rectWidth = CreateRect.randWidth;
-        rectHeight = CreateRect.randHeight;
+        rectWidth = createRectScript.randWidth;
+        rectHeight = createRectScript.randHeight;
         colorArray = gameManagerScript.colorArray;
         placed = false;
         if (!(myself.name.Contains("SinglePixel"))){
@@ -82,6 +86,9 @@ public class PlaceRect : NetworkBehaviour
 
     void Update()
     {
+
+        
+
         allSquares = gameManagerScript.allSquares;
         allPossibleSquares = gameManagerScript.allPossibleSquares;
         nowToMove = gameManagerScript.nowToMove;

@@ -8,9 +8,12 @@ public class PassMove : MonoBehaviour
 {
     [SerializeField] private GameObject gameManager;
     [SerializeField] private GameManager gameManagerScript;
+    [SerializeField] private GameObject createRect;
+    [SerializeField] private CreateRect createRectScript;
     public void Pass()
     {
         gameManagerScript = gameManager.GetComponent<GameManager>();
+        createRectScript = createRect.GetComponent<CreateRect>();
         string[] colorArray = gameManagerScript.colorArray;
         string nowToMove = gameManagerScript.nowToMove;
         int numberOfPlayers = gameManagerScript.numberOfPlayers;
@@ -28,7 +31,7 @@ public class PassMove : MonoBehaviour
             do
             {
                 gameManagerScript.nowToMove = colorArray[((Array.IndexOf(colorArray, gameManagerScript.nowToMove) + 1) % numberOfPlayers)];
-                CreateRect.createRect = true;
+                createRectScript.AssigncreateRect(true);
             }
             while (gameManagerScript.playersScores[((Array.IndexOf(colorArray, gameManagerScript.nowToMove)) % numberOfPlayers)] < 0);
         }
