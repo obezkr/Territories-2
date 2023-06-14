@@ -33,13 +33,28 @@ public class ChangeScene : MonoBehaviour
     
     public void ChangeSceneToMultiplayer(){
         BeginCoolTransitionEffect();
+        GameObject.FindGameObjectWithTag("Music").GetComponent<KeepMusicInMenu>().StopMusic();
         SceneManager.LoadScene("SampleScene");
     }
     public void ChangeSceneToSingleplayer(){
-        SceneManager.LoadScene("SampleScene");
+        GameObject.FindGameObjectWithTag("Music").GetComponent<KeepMusicInMenu>().StopMusic();
+        SceneManager.LoadScene("Singleplayer");
     }
     public void ChangeSceneToMainMenu(){
+        GameObject.FindGameObjectWithTag("Music").GetComponent<KeepMusicInMenu>().PlayMusic();
         SceneManager.LoadScene("MainMenu");
+    }
+    public void ChangeSceneToHelp(){
+        GameObject.FindGameObjectWithTag("Music").GetComponent<KeepMusicInMenu>().PlayMusic();
+        SceneManager.LoadScene("Help");
+    }
+    public void ChangeSceneToAbout(){
+        GameObject.FindGameObjectWithTag("Music").GetComponent<KeepMusicInMenu>().PlayMusic();
+        SceneManager.LoadScene("About");
+    }
+    public void ChangeSceneToSettings(){
+        GameObject.FindGameObjectWithTag("Music").GetComponent<KeepMusicInMenu>().PlayMusic();
+        SceneManager.LoadScene("Settings");
     }
     
 }

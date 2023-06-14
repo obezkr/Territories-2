@@ -9,7 +9,7 @@ public class Player : NetworkBehaviour
 
     void Start()
     {
-
+        DontDestroyOnLoad(this);
     }
 
     // Update is called once per frame

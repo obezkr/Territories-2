@@ -8,7 +8,7 @@ using Mirror;
 public class CreateRect : NetworkBehaviour
 {
     [SyncVar] public int size, randWidth, randHeight, height, width;
-    public static int rectCounter=-1;
+    [SyncVar(hook = nameof(IfServerForCreateRect))] public int rectCounter=-1;
     [SyncVar] public bool createRect;
     [SerializeField] private GameObject singlePixelPrefab;
     [SerializeField] private GameObject gameManager; // это сам обьект GameManager, который на сцене
@@ -24,49 +24,46 @@ public class CreateRect : NetworkBehaviour
         singlePixelPrefab.transform.localScale = new Vector3(size, size, 1);
     }
 
+    
     void Update()
-    {
-        if (createRect == true){
-            createRect = false;
-            if (isServer){
-                CreateValuesForRect();
-                AssignAuthorityToChosenClient(); //111111111111111
+    {   
+        if (isServer && gameManagerScript.readyToCreate==true){
+            createRect = gameManagerScript.createRect;
+            if (createRect == true){ //222222222222222
+                
+                if (isServer){
+                    CreateValuesForRect();
+                    //CreateRectOnClient();
+                    //111111111111111
+                }
+                //CreateRectOnClient();
+                gameManagerScript.createRect = false;
             }
-            CreateRectOnClient();
         }
     }
+    
     [Server]
     void CreateValuesForRect(){
-        rectCounter++;
         randWidth = size * UnityEngine.Random.Range(1, 6);
         randHeight = size * UnityEngine.Random.Range(1, 6);
+        rectCounter++;        
         Debug.Log("called CreateValuesForRect on server");
     }
 
-    [Server]
-    void AssignAuthorityToChosenClient(){ //11111111111111111  ^  
-        
-        NetworkConnectionToClient conn = NetworkServer.connections[0];
-        this.GetComponent<NetworkIdentity>().AssignClientAuthority(conn);
+
+    void IfServerForCreateRect(int a, int b){ // оболочка(тепер рудимент).
+        CreateRectOnClient();
     }
 
-
-    [Client]
-    void CreateRectOnClient(){
+    void CreateRectOnClient(){ 
         // перефарбовую префаб і роблю клона з заданими параметрами
         singlePixelPrefab.GetComponent<SpriteRenderer>().color = 
                 gameManagerScript.playersColorsArray[Array.IndexOf(gameManagerScript.colorArray, gameManagerScript.nowToMove)];
             GameObject newRandRect = Instantiate(singlePixelPrefab);
             newRandRect.transform.localScale = new Vector3(randWidth, randHeight, 1);
             newRandRect.transform.name = rectCounter + "Rect";
-            Debug.Log("called CreateValuesForRect clientRPC");
+            Debug.Log("called CreateRectOnClient on client");
     }
-    [Command]
-    public void AssigncreateRect(bool flag){
-        Debug.Log("assign createRect");
-        createRect=flag;
-    }
-
-
+    
 
 }

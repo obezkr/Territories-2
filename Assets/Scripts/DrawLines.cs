@@ -9,11 +9,14 @@ public class DrawLines : MonoBehaviour
     [SerializeField] private GameObject lineGeneratorPrefab;
     [SerializeField] private GameObject gameManager; // это сам обьект GameManager, который на сцене
     [SerializeField] private GameManager gameManagerScript; // а это его скрипт
+    [SerializeField] private GameObject createRect; // это сам обьект GameManager, который на сцене
+    [SerializeField] private CreateRect createRectScript; // а это его скрипт
     private PlaceRect placeRectScript;
 
     private void Start()
     {
         gameManagerScript = gameManager.GetComponent<GameManager>(); // с обьекта_берем_наш-скрипт
+        createRectScript = createRect.GetComponent<CreateRect>();
         width = gameManagerScript.width;
         height = gameManagerScript.height;
         size = gameManagerScript.size;
@@ -43,7 +46,7 @@ public class DrawLines : MonoBehaviour
     }
     private void DrawLinesForRect()
     {
-        GameObject currentRect = GameObject.Find(CreateRect.rectCounter + "Rect"); //находим текущий прямоугольник
+        GameObject currentRect = GameObject.Find(createRectScript.rectCounter + "Rect"); //находим текущий прямоугольник
         placeRectScript = currentRect.GetComponent<PlaceRect>();
         float rectHeight = placeRectScript.rectHeight;
         float rectWidth = placeRectScript.rectWidth;
